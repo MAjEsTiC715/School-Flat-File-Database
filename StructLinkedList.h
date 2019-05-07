@@ -22,6 +22,7 @@ struct Assignments {
 };
 
 struct Grade {
+        int class_id_g;
         int assignment_id;
         char student_ssn[9];
         int points;
@@ -188,12 +189,13 @@ void add_assignments_node( struct dll *list, int newid, char *newtitle, int newp
         list->length++;
 }
 
-void add_grade_node( struct dll *list, int newid, char *newssn, int newpoints ) {
+void add_grade_node( struct dll *list, int newclassid, int newassid, char *newssn, int newpoints ) {
         struct node *n = malloc( sizeof( struct node ) );
 
         struct Grade *g = malloc( sizeof( struct Grade ) );
 
-        g->assignment_id = newid;
+        g->class_id_g = newclassid;
+        g->assignment_id = newassid;
         strcpy(g->student_ssn, newssn);
         g->points = newpoints;
 
@@ -228,7 +230,7 @@ void func2( struct node *n, int value ) {
                 printf( "\n %d, %s, %d, %d", n->a->id, n->a->assignment_title, n->a->point_value, n->a->assignment_class_id );
         }
         if (value == 5) {
-                printf( "\n %d, %s, %d", n->g->assignment_id, n->g->student_ssn, n->g->points );
+                printf( "\n %d, %d, %s, %d", n->g->class_id_g, n->g->assignment_id, n->g->student_ssn, n->g->points );
         }
 
         if ( n->next != NULL )
@@ -247,26 +249,73 @@ void print_nodes( struct dll *list, int value ) {
 }
 
 int search_classfunc( struct node *n, int id ) {
-        if ( n->next != NULL ) 
-                if (n->c->class_id == id) {
-                        return 1;
-                }
+        if (n->c->class_id == id) {
+                return 1;
+        }
         
         return 0;
 }
 
 int search_ClassID( struct dll *list, int id ) {
-        int result;
         struct node *n = list->head;
 
         while( n != NULL ) {
-                result = search_classfunc( n, id );
-                if (result == 1) {
-                        return result;
+                if (n->c->class_id == id) {
+                        return 1;
                 }
                 else {
                         n = n->next;
                 }
         }
-        return result;
+        return 0;
+}
+
+int search_AssignmentsID( struct dll *list, int id ) {
+        struct node *n = list->head;
+
+        while( n != NULL ) {
+                if (n->a->id == id) {
+                        return 1;
+                }
+                else {
+                        n = n->next;
+                }
+        }
+        return 0;
+}
+
+int search_SSN( struct dll *list, char *ssn ) {
+        struct node *n = list->head;
+
+        while( n != NULL ) {
+                if (strcmp(n->s->ssn, ssn) == 0) {
+                        return 1;
+                }
+                else {
+                        n = n->next;
+                }
+        }
+        return 0;
+}
+
+int edit_student( struct dll *list, char *ssn ) {
+        char tempF[30];
+        char tempL[30];
+        struct node *n = list->head;
+
+        while( n != NULL ) {
+                if (strcmp(n->s->ssn, ssn) == 0) {
+                        printf("Enter New First Name (leave blank to not change): ");
+                        scanf("%s", &(tempF[30]));
+                        n->s->first[30] = tempF[30];
+                        printf("Enter New Last Name (leave blank to not change): ");
+                        scanf("%s", &(tempL[30]));
+                        strcpy(n->s->last, tempL);
+                        return 1;
+                }
+                else {
+                        n = n->next;
+                }
+        }
+        return 0;
 }
