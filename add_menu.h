@@ -41,22 +41,24 @@ void add_menu()
 			printf( "Enter SSN: " );
 			scanf("%s", &(tempS[9]));
 
-			add_student_node(&student_list, &tempF[30], &tempL[30], &tempS[9]);
+			write_students(&tempF[30], &tempL[30], &tempS[9]);
+
 			break;
 		case 2:
 			printf( "Enter Class Name: " );
 			scanf("%s", &(temp[30]));
-			add_class_node(&class_list, ClassID, &temp[30]);
+			write_classes(&temp[30], ClassID);
 			ClassID += 1;
+
 			break;
 		case 3:
 			printf( "Enter Class ID (-1 for class list): " );
 			scanf("%d", &tempClassID);
 			if (tempClassID == -1) {
-				print_nodes(&class_list, 2);
+				readClasses("classes.db");
 				break;
 			}
-			i = search_ClassID(&class_list, tempClassID);
+			i = search_ClassID(tempClassID);
 			if (i == 0) {
 				printf("No Class Found");
 				break;
@@ -65,17 +67,18 @@ void add_menu()
 			scanf("%s", &(tempAssName[30]));
 			printf( "Enter Point Value: " );
 			scanf("%d", &tempPoints);
-			add_assignments_node(&assignments_list, AssignmentID, &tempAssName[30], tempPoints, tempClassID);
+			write_assignments(tempClassID, AssignmentID, &tempAssName[30], tempPoints);
 			AssignmentID += 1;
+
 			break;
 		case 4:
 			printf( "Enter Class ID (-1 for class list): " );
 			scanf("%d", &tempClassID2);
 			if (tempClassID2 == -1) {
-				print_nodes(&class_list, 2);
+				readClasses("classes.db");
 				break;
 			}
-			i = search_ClassID(&class_list, tempClassID2);
+			i = search_ClassID(tempClassID2);
 			if (i == 0) {
 				printf("No Class Found");
 				break;
@@ -83,45 +86,47 @@ void add_menu()
 			printf( "Enter AssignmentID (-1 for class list): " );
 			scanf("%d", &tempAssID);
 			if (tempAssID == -1) {
-				print_nodes(&assignments_list, 4);
+				readAssignments("assignments.db");
 				break;
 			}
-			i = search_AssignmentsID(&assignments_list, tempAssID);
+			i = search_AssignmentsID(tempAssID);
 			if (i == 0) {
 				printf("No Assignment Found");
 				break;
 			}
 			printf( "Enter Student SSN: " );
 			scanf("%s", &(tempSSN[9]));
-			i = search_SSN(&student_list, &tempSSN[9]);
+			i = search_SSN(&tempSSN[9]);
 			if (i == 0) {
 				printf("Student SSN not Found");
 				break;
 			}
 			printf( "Enter Points: " );
 			scanf("%d", &tempPoints);
-			add_grade_node(&grade_list, tempClassID2, tempAssID, &tempSSN[9], tempPoints);
+
+			write_grades(tempClassID2, tempAssID, &tempSSN[9], tempPoints);
 			break;
 		case 5:
 			printf( "Enter Class ID (-1 for class list): " );
 			scanf("%d", &tempClassID2);
 			if (tempClassID2 == -1) {
-				print_nodes(&class_list, 2);
+				readClasses("classes.db");
 				break;
 			}
-			i = search_ClassID(&class_list, tempClassID2);
+			i = search_ClassID(tempClassID2);
 			if (i == 0) {
 				printf("No Class Found");
 				break;
 			}
 			printf( "Enter Student SSN: " );
 			scanf("%s", &(tempSSN[9]));
-			i = search_SSN(&student_list, &tempSSN[9]);
+			i = search_SSN(&tempSSN[9]);
 			if (i == 0) {
-				printf("Student SSN not Found");
+				printf("Student SSN not Found\n");
 				break;
 			}
-			add_enrollment_node(&enrollment_list, tempClassID2, &tempSSN[9]);
+
+			write_enrollments(tempClassID2, &tempSSN[9]);
 			break;
 		case 6:
 			return;

@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "StructLinkedList.h"
+#include "search_functions.h"
+#include "edit_functions.h"
+#include "write_functions.h"
+#include "delete_functions.h"
+#include "read_functions.h"
 #include "add_menu.h"
 #include "edit_menu.h"
 #include "delete_menu.h"

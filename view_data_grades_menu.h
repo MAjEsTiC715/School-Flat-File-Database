@@ -14,10 +14,20 @@ void view_data_grades_menu()
 
 	clear_buffer();
 
+	readGrades("grades.db");
+
+	int tempClassID2;
+
 	switch( choice )
 	{
 		case 1:
-			printf( "Viewing Student" );
+			printf( "Enter Class ID (-1 for class list): " );
+			scanf("%d", &tempClassID2);
+			if (tempClassID2 == -1) {
+				readClasses("classes.db");
+				break;
+			}
+			printf("The class average grade is: %d \n", classAverageGrade("classes.db", tempClassID2));
 			break;
 		case 2:
 			printf( "Viewing Class" );
@@ -29,9 +39,6 @@ void view_data_grades_menu()
 			printf( "Viewing Grade" );
 			break;
 		case 5:
-			printf( "Viewing Enrollment" );
-			break;
-		case 6:
 			return;
 		default:
 			printf( "What???" );

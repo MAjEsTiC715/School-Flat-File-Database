@@ -19,22 +19,22 @@ void view_data_menu()
 	{
 		case 1:
 			printf( "Viewing Student" );
-			print_nodes(&student_list, 1);
+			readStudents("students.db");
 			break;
 		case 2:
 			printf( "Viewing Class" );
-			print_nodes(&class_list, 2);
+			readClasses("classes.db");
 			break;
 		case 3:
 			printf( "Viewing Assignment" );
-			print_nodes(&assignments_list, 4);
+			readAssignments("assignments.db");
 			break;
 		case 4:
 			view_data_grades_menu();
 			break;
 		case 5:
 			printf( "Viewing Enrollment" );
-			print_nodes(&enrollment_list, 3);
+			readEnrollments("enrollment.db");
 			break;
 		case 6:
 			return;
