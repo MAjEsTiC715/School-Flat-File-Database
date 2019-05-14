@@ -1,5 +1,4 @@
 void edit_student( char *first, char *last, char *ssn ) {
-        int num;
         int j = 0;
         
         struct Student *s = malloc( sizeof( struct Student ) );
@@ -10,7 +9,7 @@ void edit_student( char *first, char *last, char *ssn ) {
         
         FILE * fp = fopen( "students.db", "r+" );
         
-        while (fread(&s2,sizeof(struct Student),1,fp) != NULL) {
+        while (fread(&s2,sizeof(struct Student),1,fp) != '\0') {
                 if ( strcmp( s->ssn, s2.ssn) == 0 ){
                         printf("%d\n", j);
                         break;
@@ -50,7 +49,7 @@ void edit_assignment( int class_id, int id, char *title, int points ) {
         
         FILE * fp = fopen( "assignments.db", "r+" );
         
-        while (fread(&a2,sizeof(struct Assignments),1,fp) != NULL) {
+        while (fread(&a2,sizeof(struct Assignments),1,fp) != '\0') {
                 if (a2.assignment_class_id == class_id && a2.id == id) {
                         printf("A record with requested name found.\n\n");
                         break;
@@ -77,7 +76,7 @@ void edit_grade( int class_id, int id, char *ssn, int points ) {
         
         FILE * fp = fopen( "grades.db", "r+" );
         
-        while (fread(&g2,sizeof(struct Grade),1,fp) != NULL) {
+        while (fread(&g2,sizeof(struct Grade),1,fp) != '\0') {
                 if (g2.class_id_g == class_id && g2.assignment_id == id && (strcmp (ssn, g2.student_ssn) == 0)) {
                         printf("A record with requested name found.\n\n");
                         break;

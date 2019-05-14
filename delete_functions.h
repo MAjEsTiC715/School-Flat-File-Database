@@ -15,7 +15,7 @@ int deleteStudent(char *fname, char *ssn) {
                 return -1;
         }
         
-        while (fread(&myrecord,sizeof(struct Student),1,fp) != NULL) {
+        while (fread(&myrecord,sizeof(struct Student),1,fp) != '\0') {
                 if (strcmp (ssn, myrecord.ssn) == 0) {
                         printf("A record with requested name found and deleted.\n\n");
                         found=1;
@@ -53,7 +53,7 @@ int deleteClass(char *fname, int id) {
                 return -1;
         }
         
-        while (fread(&myrecord,sizeof(struct Classes),1,fp) != NULL) {
+        while (fread(&myrecord,sizeof(struct Classes),1,fp) != '\0') {
                 if (myrecord.class_id ==  id) {
                         printf("A record with requested name found and deleted.\n\n");
                         found=1;
@@ -91,7 +91,7 @@ int deleteAssignment(char *fname, int id, int ass_id) {
                 return -1;
         }
         
-        while (fread(&myrecord,sizeof(struct Assignments),1,fp) != NULL) {
+        while (fread(&myrecord,sizeof(struct Assignments),1,fp) != '\0') {
                 if (myrecord.assignment_class_id == id && myrecord.id == ass_id) {
                         printf("A record with requested name found and deleted.\n\n");
                         found=1;
@@ -129,7 +129,7 @@ int deleteGrade(char *fname, int id, int ass_id, char *ssn) {
                 return -1;
         }
         
-        while (fread(&myrecord,sizeof(struct Grade),1,fp) != NULL) {
+        while (fread(&myrecord,sizeof(struct Grade),1,fp) != '\0') {
                 if (myrecord.class_id_g == id && myrecord.assignment_id == ass_id && (strcmp (ssn, myrecord.student_ssn) == 0)) {
                         printf("A record with requested name found and deleted.\n\n");
                         found=1;
@@ -167,7 +167,7 @@ int deleteEnrollment(char *fname, int id, char *ssn) {
                 return -1;
         }
         
-        while (fread(&myrecord,sizeof(struct Enrollment),1,fp) != NULL) {
+        while (fread(&myrecord,sizeof(struct Enrollment),1,fp) != '\0') {
                 if (myrecord.enrollment_class_id == id && (strcmp (ssn, myrecord.student_ssn) == 0)) {
                         printf("A record with requested name found and deleted.\n\n");
                         found=1;

@@ -9,7 +9,7 @@ int readStudents(char *fname) {
         }
 
         printf("The following records are in students file %s:\n", fname);
-        while (fread(&myrecord,sizeof(struct Student),1,fp) != NULL) {
+        while (fread(&myrecord,sizeof(struct Student),1,fp) != '\0') {
                 printf("%s\n", myrecord.first);
                 printf("%s\n", myrecord.last);
                 printf("%s\n\n", myrecord.ssn);
@@ -29,7 +29,7 @@ int readClasses(char *fname) {
         }
 
         printf("The following records are in classes file %s:\n", fname);
-        while (fread(&myrecord,sizeof(struct Classes),1,fp) != NULL) {
+        while (fread(&myrecord,sizeof(struct Classes),1,fp) != '\0') {
                 printf("%d\n", myrecord.class_id);
                 printf("%s\n", myrecord.class_title);
         }
@@ -48,7 +48,7 @@ int readAssignments(char *fname) {
         }
 
         printf("The following records are in assignments file %s:\n", fname);
-        while (fread(&myrecord,sizeof(struct Assignments),1,fp) != NULL) {
+        while (fread(&myrecord,sizeof(struct Assignments),1,fp) != '\0') {
                 printf("%d\n", myrecord.assignment_class_id);
                 printf("%d\n", myrecord.id);
                 printf("%s\n", myrecord.assignment_title);
@@ -69,7 +69,7 @@ int readGrades(char *fname) {
         }
 
         printf("The following records are in grades file %s:\n", fname);
-        while (fread(&myrecord,sizeof(struct Grade),1,fp) != NULL) {
+        while (fread(&myrecord,sizeof(struct Grade),1,fp) != '\0') {
                 printf("class id: %d\n", myrecord.class_id_g);
                 printf("assignments id: %d\n", myrecord.assignment_id);
                 printf("student ssn: %s\n", myrecord.student_ssn);
@@ -90,7 +90,7 @@ int readEnrollments(char *fname) {
         }
 
         printf("The following records are in enrollments file %s:\n", fname);
-        while (fread(&myrecord,sizeof(struct Enrollment),1,fp) != NULL) {
+        while (fread(&myrecord,sizeof(struct Enrollment),1,fp) != '\0') {
                 printf("%d\n", myrecord.enrollment_class_id);
                 printf("%s\n", myrecord.student_ssn);
         }

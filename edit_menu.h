@@ -57,7 +57,7 @@ void edit_menu()
 			}
 			else {
 				printf( "Enter New Class Title (leave blank to not change): " );
-				scanf("%s", &(tempClass[30]));
+				scanf(" %s", &(tempClass[30]));
 
 				edit_class(&tempClass[30], tempClassID2);
 			}
